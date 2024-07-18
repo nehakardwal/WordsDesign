@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      background-color: pink;
+    }
+    #operations button{
+      width: 100px;
+      height: 100px;
+      background-color: black;
+      color: white;
+      font-size: 20px;
+      margin-left: 120px;
+      margin-top: 50px;
+      
+
+    }
+    input{
+      margin-left: 500px;
+      margin-top: 100px;
+      width: 300px;
+      height: 50px;
+      font-size: 20px;
+    }
+    form button{
+      width: 100px;
+      height: 50px;
+      background-color: black;
+      color: white;
+    }
+    #content{
+      font-size: 40px;
+      margin-left: 500px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div id="operations">
+    <button>Bold</button>
+    <button>Cursive</button>
+    <button>Underline</button>
+    <button>f+</button>
+    <button>f-</button>
+    <button>None</button>
+  </div>
+  <div id="content">
+  </div>
+
+  <form>
+    <div>
+      <input type="text">
+      <button id="add">Add</button>
+    </div>
+  </form>
+
+  <script>
+    const form = document.querySelector('form')
+    const input = document.querySelector('input')
+    const content = document.getElementById('content');
+    let ps = document.querySelectorAll('#content p');
+    let fontSizeArr = []
+
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const value = input.value;
+      input.value = ''
+
+      const p = document.createElement('p')
+      p.innerText = value;
+      content.append(p);
+      ps = document.querySelectorAll('#content p')
+      fontSizeArr.push(16)
+
+
+
+      for(let i =0; i<ps.length; i+=1) {
+        ps[i].addEventListener('click', () => {
+          if(op == 'Bold') {
+            ps[i].style.fontWeight = '800';
+          }
+          else if(op == 'Cursive') {
+            ps[i].style.fontFamily = 'cursive';
+          }
+          else if(op == 'Underline') {
+            ps[i].style.textDecoration = 'Underline';
+          }
+          else if(op == 'f+') {
+            ps[i].style.fontSize = `${++fontSizeArr[i]}px`;
+          }
+          else if(op == 'f-') {
+            ps[i].style.fontSize = `${--fontSizeArr[i]}px`;
+          }
+          else if(op == 'None') {
+            ps[i].style.fontWeight = '100';
+            ps[i].style.fontFamily = 'arial';
+            ps[i].style.textDecoration = 'none';
+            ps[i].style.fontSize = '16px';
+          }
+        })
+      }
+    })
+
+
+  let op = null;
+
+   const buttons = document.querySelectorAll('#operations button');
+   for(let i=0; i<buttons.length; i++) {
+      buttons[i].addEventListener('click', function(e) {
+        const text = buttons[i].innerText;
+        op = text;
+      })
+   }
+
+  </script>
+</body>
+</html>
